@@ -1,7 +1,5 @@
-# red-system-manual(Red/System语言规范)
-A manual for Red/System dialect
-
-*Red/System Language Specification 中文翻译计划*
+# Red/System语言规范
+**Red/System Language Specification 中文翻译计划**
 
 原文地址：http://static.red-lang.org/red-system-specs-light.html
 
