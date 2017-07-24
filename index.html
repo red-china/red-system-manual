@@ -142,20 +142,20 @@
 <p>Red/System可以看作是拥有内存指针和一些基本且有限的数据类型的和C语言同一级别的语言。</p>
 <p><u>注意</u>：Red/System当前提供了一套完整的从源码构建出可执行文件的工具链。这是Red/System存在于Red中的临时状态，因此它也被嵌入在Red脚本中。</p>
 </blockquote>
-<h2 id="section-2">2. Syntax</h2>
+<h2 id="section-2">2. 语法</h2>
 <blockquote>
-<p>The syntax is almost the same as the one used by REBOL language, as the lexer (<a href="http://www.rebol.com/docs/words/wload.html" target="_new">LOAD</a>) is currently provided by REBOL during the bootstrapping phase. The REBOL syntax does not have a formal specification nor an exhaustive documentation, just a superficial description, but it is enough to work with. See:</p>
+<p>Red的语法和REBOL语言的语法基本上相同，因为用在启动阶段的词法分析器(<a href="http://www.rebol.com/docs/words/wload.html" target="_new">LOAD</a>)当前是就是用REBOL语言写的。REBOL语言的语法既没有正式的规范也没有完整的文档，仅仅是一个粗略的描述。不过这都不是事儿，拿来开发项目完全足够了。详情请参考：</p>
 <ul>
-<li><a href="http://www.rebol.com/docs/core23/rebolcore-3.html" target="_new">http://www.rebol.com/docs/core23/rebolcore-3.html</a> (There is a typo in the table, all literals are missing a caret (^) character after the first quote)</li>
+<li><a href="http://www.rebol.com/docs/core23/rebolcore-3.html" target="_new">http://www.rebol.com/docs/core23/rebolcore-3.html</a> (这个页面的表格中有一处错误，所有字面量的第一个引号后面都缺少(^)符号)</li>
 <li><a href="http://www.rebol.com/r3/docs/guide/code-syntax.html" target="_new">http://www.rebol.com/r3/docs/guide/code-syntax.html</a></li>
 </ul>
-<p>A complete syntax specification for both Red and Red/System will be provided during the implementation of the Red language layer.</p>
-<p>For now, Red/System uses 8-bit character encoding (ASCII). Once proper Unicode support will be provided by the Red language layer, Red/System will switch to UTF-8 source encoding.</p>
-<p>Here are a few practical aspects of the language syntax:</p>
+<p>在实现Red的语言层面之后，我们将会提供一份完整的Red和Red/System的语法规范。</p>
+<p>目前，Red/System使用的是8-bit字符编码(ASCII)。一旦在Red的语言层面实现了对Unicode的支持，Red/System也会切换到UTF-8编码。</p>
+<p>以下是一些语言语法的具体部分：</p>
 </blockquote>
-<h3 id="section-2.1">2.1 Delimiters</h3>
+<h3 id="section-2.1">2.1 分隔符</h3>
 <blockquote>
-<p>String delimiters: double quotes</p>
+<p>字符串分隔符：双引号</p>
 <pre>"this is a string"
 
 {This is
@@ -163,23 +163,23 @@
  string.
 }
 </pre>
-<p>Block of code delimiters: square brackets</p>
+<p>代码块分隔符：方括号</p>
 <pre>if a &gt; 0 [print "TRUE"]
 
 either a &gt; 0 [print "TRUE"][print "FALSE"]
 
 while [a &gt; 0][print "loop" a: a - 1]
 </pre>
-<p>Path separator: slash (denotes a hierarchical relation)</p>
+<p>路径分隔符：斜线(表示层级关系)</p>
 <pre>s: declare struct! [i [integer!] b [byte!]]
 s/i: 123
 s/b: #"A"
 </pre>
 </blockquote>
-<h3 id="section-2.2">2.2 Free-form syntax</h3>
+<h3 id="section-2.2">2.2 范式无关语法</h3>
 <blockquote>
-<p>Red/System (and Red) inherits the free-form syntax of the REBOL language. The only syntactic constraints are putting a whitespace (in the large sense) between tokens and correctly pairing delimiters.</p>
-<p>Examples of valid code:</p>
+<p>Red/System(以及Red)继承了REBOL语言的范式无关语法。只有句法约束是放在以空格分隔的记号和一对分隔符之间。</p>
+<p>有效的例子代码：</p>
 <pre>while [a &gt; 0][print "loop" a: a - 1]
 
 while [a &gt; 0]
@@ -192,26 +192,26 @@ while [
    a: a - 1
 ]
 </pre>
-<p>Code guidelines are not yet available. They will follow standard REBOL practices.</p>
+<p>现在代码风格还不确定，我们目前是遵循标准的REBOL风格。</p>
 </blockquote>
-<h3 id="section-2.3">2.3 Comments</h3>
+<h3 id="section-2.3">2.3 注释</h3>
 <blockquote>
-<p>Inline comment:</p>
+<p>单行注释：</p>
 <pre>;this is a commented line
 
 print "hello world"    ; this is another comment
 </pre>
-<p>Multiline comment:</p>
+<p>多行注释：</p>
 <pre>comment {
     This is a
     multiline
     comment
 }
 </pre>
-<p>Usage rules:</p>
+<p>使用规定：</p>
 <ul>
-<li>Inline comments are allowed anywhere in the source code</li>
-<li>Multi-line comments are allowed anywhere in the source code, except in expressions. Example:</li>
+<li>单行注释允许出现在代码中的任何地方</li>
+<li>多行注释也可以出现在代码中的任何地方，但是不允许出现在表达式中间。例如：</li>
 </ul>
 <pre>a: 1 + comment {5} 4   ; this will produce a compilation error
 </pre>
@@ -1063,20 +1063,20 @@ size? s!                   ;-- will return 8
 <p>Size? can only be used on a literal c-string, when only a c-string pointer is available use <b>length?</b> function.</p>
 </fieldset>
 </blockquote>
-<h2 id="section-5">5. Expressions</h2>
+<h2 id="section-5">5. 表达式</h2>
 <blockquote>
-<p>Expressions are the basic building blocks of a Red/System program. They are composed of:</p>
+<p>表达式是组成Red/System程序的基本块。它们由以下方面组成：</p>
 <ul>
-<li>variables</li>
-<li>literal values</li>
-<li>function calls</li>
-<li>operator calls</li>
-<li>sub-expression in parentheses</li>
+<li>变量</li>
+<li>字面值</li>
+<li>函数调用</li>
+<li>操作符调用</li>
+<li>包裹在括号中的子表达式</li>
 </ul>
 </blockquote>
-<h3 id="section-5.1">5.1 Formal grammar rules</h3>
+<h3 id="section-5.1">5.1 一般性规则</h3>
 <blockquote>
-<p>The grammar rules are specified in <a href="http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form" target="_new">BNF</a> format, except when using ... to mark a definition in native language.</p>
+<p>语法规则采用<a href="http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form" target="_new">BNF</a>格式约定, 除了省略号...，这意味着它是语言本身定义的。</p>
 <pre>&lt;literal&gt;       ::= ... any valid Red/System literal value ...
 &lt;variable&gt;      ::= ... any valid Red/System variable name ...
 &lt;logic-call&gt;    ::= ... function call that returns a value of logic! type ...
@@ -1107,9 +1107,9 @@ size? s!                   ;-- will return 8
 
 &lt;expression&gt;    ::= &lt;call&gt; | &lt;value&gt; | &lt;short-circuit&gt;
 </pre>
-<p>An expression can be used standalone, after an assignment or as argument to some statements (RETURN, IF or EITHER used as statement).</p>
-<p><u>Note</u>: EITHER can be used in an expression only if the last expressions in both its TRUE block and FALSE block are of the same type. When used in an expression, EITHER is similar to the C ternary operator (?).</p>
-<p><b>Examples</b></p>
+<p>表达式可以单独使用，或者在赋值语句之后使用，也可以作为另一个函数的参数使用(RETURN, IF或EITHER用作语句)。</p>
+<p><u>注意</u>：EITHER只能在它后面的TRUE block和FALSE block是相同类型的情况下才可以用在表达式中。当在表达式中使用EITHER的时候，它相当于C语言的二元操作符(?)。</p>
+<p><b>例子</b></p>
 <pre>a: 123
 foo a + 1
 0 &lt; foo a + 1
@@ -1120,10 +1120,10 @@ if any [(0 &lt; foo a + 1) a &gt; 0][print "ok"]
 b: 1 + (2 * a - either zero? a [0][a + 100])
 </pre>
 </blockquote>
-<h3 id="section-5.2">5.2 Evaluation order rule</h3>
+<h3 id="section-5.2">5.2 执行顺序规则</h3>
 <blockquote>
-<p>Expressions are evaluated from <b>left to right</b>. There is no operator precedence except for infix functions which do have precedence over prefix calls.</p>
-<p><b>Examples</b></p>
+<p>表达式是<b>从左到右</b>执行的。所以在Red中没有所谓的操作符优先级，前面的操作符总是比后面的操作符先执行。</p>
+<p><b>例子</b></p>
 <pre>1 + 2 * 3                              ;-- (1 + 2) * 3 returns 9
 1 + 2 * 3 = 9                          ;-- ((1 + 2) * 3) = 9 returns TRUE
 9 = 1 + 2 * 3                          ;-- ((9 = 1) + 2) * 3 raises an error!
@@ -2251,26 +2251,26 @@ push p/value
 return: an integer value
 </pre>
 </blockquote>
-<h2 id="section-12">12. Debugging functions</h2>
+<h2 id="section-12">12. 调试函数</h2>
 <blockquote>
 </blockquote>
 <h3 id="section-12.1">12.1 assert</h3>
 <blockquote>
-<p>Make a runtime assertion. If assertion fails, a runtime error will be raised.</p>
-<p><b>Syntax</b></p>
+<p>产生运行时断言。如果断言失败，运行时错误将会被抛出。</p>
+<p><b>语法</b></p>
 <pre>assert &lt;conditional expression&gt;
 </pre>
-<p><b>Example</b></p>
+<p><b>例子</b></p>
 <pre>Red/System []
 
 assert 1 = 2
 </pre>
-<p>will produce if saved to %test.reds file and run:</p>
+<p>保存代码到%test.reds文件然后运行，将会抛出：</p>
 <pre>*** Runtime Error 98: assertion failed at line 3
 *** in file: %test.reds
 </pre>
-<p></p><fieldset class="fset"><legend>Compiler debug mode</legend>
-<p>Assertion will only be compiled if the <b>debug?</b> compilation option is set to YES or if the <b>-g</b> command-line option is used, else the assertion will be ignored by the compiler.</p>
+<p></p><fieldset class="fset"><legend>编译器调试模式</legend>
+<p>断言功能只有在<b>debug?</b>编译选项被设置为YES或者命令行指定了<b>-g</b>选项的情况下才会启用，否则的话，断言功能会被编译器忽略。</p>
 </fieldset>
 </blockquote>
 <h2 id="section-13">13. System structure</h2>
@@ -3260,9 +3260,9 @@ on-load: func [
 <p>Currently it is only supported on Windows platforms.</p>
 </fieldset>
 </blockquote>
-<h2 id="section-18">18. Reserved keywords</h2>
+<h2 id="section-18">18. 保留关键字</h2>
 <blockquote>
-<p>The list of following symbols and keywords are reserved, they cannot be used as variable or function name:</p>
+<p>以下的符号和关键字都是被保留的，它们不能被用作变量名或函数名：</p>
 <pre>%           &amp;           * 
 +           -           -**
 /           //          ///
@@ -3282,8 +3282,8 @@ switch      throw       true
 until       use         while
 with        xor
 </pre>
-<p></p><fieldset class="fset"><legend>Bootstrap constraints</legend>
-<p>Both -** (internal representation for &gt;&gt;&gt;) and /// (internal representation for %) are required to workaround REBOL's lexical scanner limitations. Those symbols will be removed from the reserved keywords list once the bootstrap phase will end.</p>
+<p></p><fieldset class="fset"><legend>启动约束</legend>
+<p>-**(内部表示为&gt;&gt;&gt;)和///(内部表示为%)都是为了满足REBOL的词法扫描器的要求，一旦启动阶段完成，这些符号会自动从保留关键字列表中移除。</p>
 </fieldset>
 </blockquote>
 <h2 id="section-19">19. Possible Evolutions</h2>
