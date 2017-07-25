@@ -216,43 +216,43 @@ print "hello world"    ; this is another comment
 <pre>a: 1 + comment {5} 4   ; this will produce a compilation error
 </pre>
 </blockquote>
-<h2 id="section-3">3. Variables</h2>
+<h2 id="section-3">3. 变量</h2>
 <blockquote>
-<p>Variables are labels used to represent a memory location. The labels (called <b>identifiers</b> from now) are formed by sequences of printable characters without any blank (space, newlines or tabulation). Printable characters are defined as any one-byte character in the 20h-7Eh range that can be printed out in system's console excepting the following ones (used as delimiters or reserved for some datatypes literals):</p>
+<p>变量是用于表示内存位置的一个标签。标签(现在叫做标识符(<b>identifiers</b>))是由一系列不包含任何空白(空格、换行或制表符)的可打印字符组成的。可打印字符是除了以下(用作分隔符或一些数据类型字面量)这些之外任何编码范围在20h-7Eh的单字节范围内的字符：</p>
 <pre>[ ] { } " ( ) / \ @ # $ % ^ , : ; &lt; &gt;
 </pre>
-<p>There is a restriction on the first character, the following characters are forbidden in the first position, but allowed at other positions:</p>
+<p>第一个字符有严格的限制，以下是严禁出现在第一个字符，但是允许出现在其它位置的：</p>
 <pre>0 1 2 3 4 5 6 7 8 9 '
 </pre>
-<p>Also there is a another restriction to avoid letting the compiler mistake an hex integer for a variable name. Variable names starting with A-F letters consisting of 2, 4 or 8 A-F and 0-9 characters and ending with h are not allowed.</p>
-<p>All identifiers (variables and function names) are <u>case-insensitive</u>.</p>
-<p></p><fieldset class="fset"><legend>Unicode support</legend>
-<p>As indicated in the Syntax section, Unicode support is not available during the bootstrapping phase, it will be available at Red layer, so Red/System will inherit it once rewritten in Red.</p>
+<p>另外还有个为了避免编译器误认为十六进制是一个变量名的限制：以2个A-F字母开头，加上4或8个A-F和0-9字符，然后以h结尾的变量名，都是不允许的。</p>
+<p>所有的标识符(变量和函数名)都是<u>大小写不敏感</u>的。</p>
+<p></p><fieldset class="fset"><legend>Unicode支持</legend>
+<p>如语法部分所言，Unicode支持目前在启动阶段无效，它在Red层才有效，所以一旦Red/System用Red重写，Red/System会继承此特性。</p>
 </fieldset>
 </blockquote>
-<h3 id="section-3.1">3.1 Setting a value</h3>
+<h3 id="section-3.1">3.1 设置值</h3>
 <blockquote>
-<p>Variables can hold any value of the available datatypes. This can be the real value (like integer! or pointer!) or a reference to the real value as is the case for struct! or c-string!). To assign a value to a variable, use a colon character at the end of the variable identifier.</p>
+<p>变量可以保存任何有效的数据类型值。它可以是一个实数(比如integer!或pointer!)或一个到真实值的一个引用。为了给变量赋值，在标识符后面写一个分号即可。</p>
 <pre>foo: 123
 bar: "hello"
 </pre>
-<p></p><fieldset class="fset"><legend>Multiple assignments</legend>
-<p>Multiple assignments, like a: b: 123, are not currently supported in Red/System. Such a feature will be added in the future at some point, probably on the rewrite of Red/System in Red.</p>
+<p></p><fieldset class="fset"><legend>多次赋值</legend>
+<p>多次赋值，例如 a: b: 123，当前在Red/System中还没有支持。这种特性将会在将来的某个时间点添加，也许在用Red重写Red/System的时候。</p>
 </fieldset>
 </blockquote>
-<h3 id="section-3.2">3.2 Getting a value</h3>
+<h3 id="section-3.2">3.2 获取值</h3>
 <blockquote>
-<p>Just use the variable name without any decoration to get its value or to pass it as a function's argument.</p>
+<p>直接用变量名，不用任何其它的装饰就能得到它的值，或者将它作为函数参数：</p>
 <pre>bar: "hello"
 print bar
 </pre>
-<p>will output:</p>
+<p>将会输出：</p>
 <pre>hello
 </pre>
 </blockquote>
-<h3 id="section-3.3">3.3 Typing</h3>
+<h3 id="section-3.3">3.3 类型声明</h3>
 <blockquote>
-<p>Variables do have a type. Variables do not need to be declared before being used, but they require to be <u>initialized</u> anyway. Function local variables require to be declared, but the type specification part can be skipped if the variable is properly initialized. For example:</p>
+<p>变量全都拥有类型。它不需要在使用前声明类型，但是初始化的时候需要。函数局部变量也要求声明类型，但是如果变量已经被相应地初始化了，那么类型声明部分可以跳过。例如这些：</p>
 <pre>foo: 123
 bar: "hello"
 size: length? bar
@@ -267,14 +267,14 @@ compute: func [
    a + c
 ]
 </pre>
-<p>are valid variable usages.</p>
-<p>Initializations have to be done at root level of code, attempt to initialize from a block of code will result in a compilation error.</p>
+<p>都是有效的用法。</p>
+<p>初始化必须在代码的最顶层完成，尝试在一个代码块中初始化将会造成编译时错误。</p>
 <pre>foo: 123                               ;-- valid initialization
 
 if a &lt; b [foo: 123]                    ;-- invalid initialization
 </pre>
-<p><u>Note</u>: A function body block is considered a root level.</p>
-<p>Allowed types for variables are:</p>
+<p><u>注意</u>：函数的body block也被看作是最顶层。</p>
+<p>允许的变量类型为以下：</p>
 <ul>
 <li>integer!</li>
 <li>byte!</li>

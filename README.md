@@ -13,19 +13,19 @@
 
 ### 翻译进度(打勾表示已翻译)
 
-- [x] 1. 概要([Xuehua Cai][pixcai])
+- [x] 1. 概要([pixcai][pixcai])
 
-- [x] 2. 语法([Xuehua Cai][pixcai])
+- [x] 2. 语法([pixcai][pixcai])
 
-  - [x] 2.1 分隔符([Xuehua Cai][pixcai])
-  - [x] 2.2 范式无关语法([Xuehua Cai][pixcai])
-  - [x] 2.3 注释([Xuehua Cai][pixcai])
+  - [x] 2.1 分隔符([pixcai][pixcai])
+  - [x] 2.2 范式无关语法([pixcai][pixcai])
+  - [x] 2.3 注释([pixcai][pixcai])
 
-- [ ] 3. 变量
+- [x] 3. 变量([pixcai][pixcai])
 
-  - [ ] 3.1 设置值
-  - [ ] 3.2 获取值
-  - [ ] 3.3 类型声明 
+  - [x] 3.1 设置值([pixcai][pixcai])
+  - [x] 3.2 获取值([pixcai][pixcai])
+  - [x] 3.3 类型声明([pixcai][pixcai])
 
 - [ ] 4. 数据类型
   
@@ -40,10 +40,10 @@
   - [ ] 4.9 类型转换
   - [ ] 4.10 大小
 
-- [x] 5. 表达式([Xuehua Cai][pixcai])
+- [x] 5. 表达式([pixcai][pixcai])
 
-  - [x] 5.1 一般性规则([Xuehua Cai][pixcai])
-  - [x] 5.2 执行顺序规则([Xuehua Cai][pixcai])
+  - [x] 5.1 一般性规则([pixcai][pixcai])
+  - [x] 5.2 执行顺序规则([pixcai][pixcai])
 
 - [ ] 6. 函数
 
@@ -88,38 +88,38 @@
   - [ ] 10.2 catch
   - [ ] 10.3 异常值
 
-- [x] 11. 栈函数
+- [x] 11. 栈函数([pixcai][pixcai])
 
-  - [x] 11.1 push
-  - [x] 11.2 pop
+  - [x] 11.1 push([pixcai][pixcai])
+  - [x] 11.2 pop([pixcai][pixcai])
 
-- [x] 12. 调试函数([Xuehua Cai][pixcai])
+- [x] 12. 调试函数([pixcai][pixcai])
 
-  - [x] 12.1 assert([Xuehua Cai][pixcai])
+  - [x] 12.1 assert([pixcai][pixcai])
 
-- [x] 13. 系统结构体
+- [x] 13. 系统结构体([pixcai][pixcai])
 
-  - [x] 13.1 args-count
-  - [x] 13.2 args-list
-  - [x] 13.3 env-vars
-  - [x] 13.4 stack/top
-  - [x] 13.5 stack/frame
-  - [x] 13.6 stack/align
-  - [x] 13.7 stack/allocate
-  - [x] 13.8 stack/free
-  - [x] 13.9 pc
-  - [x] 13.10 cpu
-  - [x] 13.11 cpu/overflow?
-  - [x] 13.12 fpu/type
+  - [x] 13.1 args-count([pixcai][pixcai])
+  - [x] 13.2 args-list([pixcai][pixcai])
+  - [x] 13.3 env-vars([pixcai][pixcai])
+  - [x] 13.4 stack/top([pixcai][pixcai])
+  - [x] 13.5 stack/frame([pixcai][pixcai])
+  - [x] 13.6 stack/align([pixcai][pixcai])
+  - [x] 13.7 stack/allocate([pixcai][pixcai])
+  - [x] 13.8 stack/free([pixcai][pixcai])
+  - [x] 13.9 pc([pixcai][pixcai])
+  - [x] 13.10 cpu([pixcai][pixcai])
+  - [x] 13.11 cpu/overflow?([pixcai][pixcai])
+  - [x] 13.12 fpu/type([pixcai][pixcai])
   - [ ] 13.13 fpu/option
-  - [x] 13.14 fpu/mask
-  - [x] 13.15 fpu/control-word
-  - [x] 13.16 fpu/epsilon
-  - [x] 13.17 fpu/update
-  - [x] 13.18 fpu/init
-  - [x] 13.19 alias
+  - [x] 13.14 fpu/mask([pixcai][pixcai])
+  - [x] 13.15 fpu/control-word([pixcai][pixcai])
+  - [x] 13.16 fpu/epsilon([pixcai][pixcai])
+  - [x] 13.17 fpu/update([pixcai][pixcai])
+  - [x] 13.18 fpu/init([pixcai][pixcai])
+  - [x] 13.19 alias([pixcai][pixcai])
 
-- [x] 14. 编译器指令
+- [x] 14. 编译器指令([pixcai][pixcai])
 
 - [ ] 15. 导入外部库
 
@@ -148,7 +148,7 @@
   - [ ] 17.5 共享库程序
   - [ ] 17.6 驱动程序
 
-- [x] 18. 保留关键字([Xuehua Cai][pixcai])
+- [x] 18. 保留关键字([pixcai][pixcai])
 
 - [ ] 19. 未来的改进
 
