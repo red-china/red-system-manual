@@ -88,38 +88,38 @@
   - [ ] 10.2 catch
   - [ ] 10.3 异常值
 
-- [ ] 11. 栈函数
+- [x] 11. 栈函数
 
-  - [ ] 11.1 push
-  - [ ] 11.2 pop
+  - [x] 11.1 push
+  - [x] 11.2 pop
 
 - [x] 12. 调试函数([Xuehua Cai][pixcai])
 
   - [x] 12.1 assert([Xuehua Cai][pixcai])
 
-- [ ] 13. 系统结构体
+- [x] 13. 系统结构体
 
-  - [ ] 13.1 args-count
-  - [ ] 13.2 args-list
-  - [ ] 13.3 env-vars
-  - [ ] 13.4 stack/top
-  - [ ] 13.5 stack/frame
-  - [ ] 13.6 stack/align
-  - [ ] 13.7 stack/allocate
-  - [ ] 13.8 stack/free
-  - [ ] 13.9 pc
-  - [ ] 13.10 cpu
-  - [ ] 13.11 cpu/overflow?
-  - [ ] 13.12 fpu/type
+  - [x] 13.1 args-count
+  - [x] 13.2 args-list
+  - [x] 13.3 env-vars
+  - [x] 13.4 stack/top
+  - [x] 13.5 stack/frame
+  - [x] 13.6 stack/align
+  - [x] 13.7 stack/allocate
+  - [x] 13.8 stack/free
+  - [x] 13.9 pc
+  - [x] 13.10 cpu
+  - [x] 13.11 cpu/overflow?
+  - [x] 13.12 fpu/type
   - [ ] 13.13 fpu/option
-  - [ ] 13.14 fpu/mask
-  - [ ] 13.15 fpu/control-word
-  - [ ] 13.16 fpu/epsilon
-  - [ ] 13.17 fpu/update
-  - [ ] 13.18 fpu/init
-  - [ ] 13.19 alias
+  - [x] 13.14 fpu/mask
+  - [x] 13.15 fpu/control-word
+  - [x] 13.16 fpu/epsilon
+  - [x] 13.17 fpu/update
+  - [x] 13.18 fpu/init
+  - [x] 13.19 alias
 
-- [ ] 14. 编译器指令
+- [x] 14. 编译器指令
 
 - [ ] 15. 导入外部库
 

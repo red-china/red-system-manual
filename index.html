@@ -2224,18 +2224,18 @@ dispatch 2
 <pre>bar
 </pre>
 </blockquote>
-<h2 id="section-11">11. Stack functions</h2>
+<h2 id="section-11">11. 栈函数</h2>
 <blockquote>
 </blockquote>
 <h3 id="section-11.1">11.1 push</h3>
 <blockquote>
-<p>Push a value on top of execution stack. Stack pointer is modified.</p>
-<p><b>Syntax</b></p>
+<p>将一个值放入执行栈的栈顶，栈指针被修改。</p>
+<p><b>语法</b></p>
 <pre>push &lt;value&gt;
 
 &lt;value&gt;: expression of any type
 </pre>
-<p><b>Examples</b></p>
+<p><b>例子</b></p>
 <pre>push 123
 push a
 push "hello"
@@ -2244,8 +2244,8 @@ push p/value
 </blockquote>
 <h3 id="section-11.2">11.2 pop</h3>
 <blockquote>
-<p>Pop a value from top of execution stack. Stack pointer is modified.</p>
-<p><b>Syntax</b></p>
+<p>从执行栈的栈顶弹出一个值，栈指针被修改。</p>
+<p><b>语法</b></p>
 <pre>pop
 
 return: an integer value
@@ -2273,14 +2273,14 @@ assert 1 = 2
 <p>断言功能只有在<b>debug?</b>编译选项被设置为YES或者命令行指定了<b>-g</b>选项的情况下才会启用，否则的话，断言功能会被编译器忽略。</p>
 </fieldset>
 </blockquote>
-<h2 id="section-13">13. System structure</h2>
+<h2 id="section-13">13. 系统结构体</h2>
 <blockquote>
-<p>System structure is a special struct value, defined at run-time, that gives access to some core features of Red/System.</p>
+<p>系统结构体是在运行时定义的一种特殊的结构体值，可以用来访问Red/System的一些核心特性。</p>
 </blockquote>
 <h3 id="section-13.1">13.1 args-count</h3>
 <blockquote>
-<p>Informs about the number of words passed on command-line. The executable itself is included in the count, so <b>args-count</b> is greater or equal to one.</p>
-<p><b>Syntax</b></p>
+<p>得到命令行传递的参数个数。可执行文件自身也被计算在内，所以<b>args-count</b>总是大于等于1.</p>
+<p><b>语法</b></p>
 <pre>system/args-count
 
 return: an integer value (&gt;= 1)
@@ -2288,18 +2288,18 @@ return: an integer value (&gt;= 1)
 </blockquote>
 <h3 id="section-13.2">13.2 args-list</h3>
 <blockquote>
-<p>Pointer to an array of words passed on command-line (including the program name). The array's end is marked by a null pointer.</p>
-<p><b>Syntax</b></p>
+<p>指向一个包含命令行参数的数组(包括程序自身)，数组的结尾用空指针(null pointer)标记。</p>
+<p><b>语法</b></p>
 <pre>system/args-list
 
 return: a pointer value of type: str-array! (alias)
 </pre>
-<p>The pointer alias is defined as:</p>
+<p>指针别名被定义为：</p>
 <pre>str-array!: alias struct! [
    item [c-string!]
 ]
 </pre>
-<p><b>Example</b></p>
+<p><b>例子</b></p>
 <pre>Red/System [purpose: "demo system/args-* info usage"]
 
 print ["count: " system/args-count lf]
@@ -2312,10 +2312,10 @@ until [
    args/item = null 
 ]
 </pre>
-<p>If compiled as <i>show-args</i> executable, and called as:</p>
+<p>如果将上面的代码编译为<i>show-args</i>可执行文件，然后运行：</p>
 <pre>show-args 123 -p hello
 </pre>
-<p>it would output:</p>
+<p>将会输出：</p>
 <pre>count: 4
 1: show-args
 2: 123
@@ -2325,18 +2325,18 @@ until [
 </blockquote>
 <h3 id="section-13.3">13.3 env-vars</h3>
 <blockquote>
-<p>Pointer to an array of shell environment variables with their value. The array's end is marked by a null pointer.</p>
-<p><b>Syntax</b></p>
+<p>指向一个包含SHELL环境变量和值的数组，数组的结尾用空指针(null pointer)标记。</p>
+<p><b>语法</b></p>
 <pre>system/env-vars
 
 return: a pointer value of type: str-array! (alias)
 </pre>
-<p>The pointer alias is defined as:</p>
+<p>指针的别名被定义为：</p>
 <pre>str-array!: alias struct! [
    item [c-string!]
 ]
 </pre>
-<p><b>Example</b></p>
+<p><b>例子</b></p>
 <pre>Red/System [purpose: "demo system/env-vars usage"]
 
 env: system/env-vars 
@@ -2346,57 +2346,57 @@ until [
    env/item = null 
 ]
 </pre>
-<p>would output (specific to your shell/OS):</p>
+<p>将会输出(依你的操作系统和SHELL而定)：</p>
 <pre>ORBIT_SOCKETDIR=/tmp/orbit-root
 SSH_AGENT_PID=2248
 TERM=xterm
 SHELL=/bin/bash
 ...                                ;-- rest of output omitted
 </pre>
-<p></p><fieldset class="fset"><legend>Implementation note</legend>
-<p>On Windows platforms, system/env-vars is always set to null. This may change in future.</p>
+<p></p><fieldset class="fset"><legend>注意</legend>
+<p>在Windows平台上，system/env-vars总是为null。这一点将来可能会改进。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.4">13.4 stack/top</h3>
 <blockquote>
-<p>Set or retrieve execution stack top address.</p>
-<p><b>Syntax</b></p>
-<p>Getting stack top value:</p>
+<p>设置或返回可执行栈的栈顶地址。</p>
+<p><b>语法</b></p>
+<p>获取栈顶地址：</p>
 <pre>system/stack/top
 
 return: a pointer value of type: pointer! [integer!]
 </pre>
-<p>Setting stack top value:</p>
+<p>设置栈顶地址：</p>
 <pre>system/stack/top: &lt;address&gt;
 
 &lt;address&gt;: a pointer value of type: pointer! [integer!]
 </pre>
-<p></p><fieldset class="fset"><legend>Stack pointer modification</legend>
-<p>Do not use it unless you know exactly what you are doing, else your program will most probably crash.</p>
+<p></p><fieldset class="fset"><legend>关于修改栈指针</legend>
+<p>除非你知道修改所带来的结果，否则不要轻易修改栈指针。不然你的程序基本上运行会崩溃。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.5">13.5 stack/frame</h3>
 <blockquote>
-<p>Set or retrieve execution stack frame address.</p>
-<p><b>Syntax</b></p>
-<p>Getting stack frame value:</p>
+<p>设置或返回可执行栈的栈帧地址。</p>
+<p><b>语法</b></p>
+<p>获取栈帧地址：</p>
 <pre>system/stack/frame
 
 return: a pointer value of type: pointer! [integer!]
 </pre>
-<p>Setting stack frame value:</p>
+<p>设置栈帧地址：</p>
 <pre>system/stack/frame: &lt;address&gt;
 
 &lt;address&gt;: a pointer value of type: pointer! [integer!]
 </pre>
-<p></p><fieldset class="fset"><legend>Stack pointer modification</legend>
-<p>Do not use it unless you know exactly what you are doing, else your program will most probably crash.</p>
+<p></p><fieldset class="fset"><legend>关于修改栈指针</legend>
+<p>除非你知道修改所带来的结果，否则不要轻易修改栈指针。不然你的程序基本上运行会崩溃。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.6">13.6 stack/align</h3>
 <blockquote>
-<p>Ensures that native stack is properly aligned at the point of calling, according to target ABI requirements. It returns the newly aligned stack pointer.</p>
-<p><b>Syntax</b></p>
+<p>确保本地栈根据目标ABI要求对齐调用点。它返回一个新的、对齐后的栈指针。</p>
+<p><b>语法</b></p>
 <pre>system/stack/align
 
 return: a pointer value of type: pointer! [integer!]
@@ -2404,85 +2404,85 @@ return: a pointer value of type: pointer! [integer!]
 </blockquote>
 <h3 id="section-13.7">13.7 stack/allocate</h3>
 <blockquote>
-<p>Reserves a storage space on stack (in stack slots unit) and returns a pointer the beginning of that space. This can be used to allocate arbitrary space for data structure on native stack. Such space will be automatically freed on a function exit.</p>
-<p><b>Syntax</b></p>
+<p>在栈上(在栈槽单元内)保留一块存储区域，然后返回执行这块区域首地址的指针。它可以给本地栈上的数据结构分配任意的空间，这种空间在函数退出后会自动释放。</p>
+<p><b>语法</b></p>
 <pre>&lt;ptr&gt;: system/stack/allocate &lt;slots&gt;
 
 &lt;ptr&gt;  : variable of type: pointer! [integer!]
 &lt;slots&gt;: expression returning an integer
 </pre>
-<p></p><fieldset class="fset"><legend>Stack slots unit</legend>
-<p>Stack slots unit are system-dependent, on IA-32 and ARM, a slot is equal to 4 bytes.</p>
+<p></p><fieldset class="fset"><legend>栈槽单元</legend>
+<p>栈槽单元依赖于系统架构，在IA-32和ARM上，一个单元等于4个字节。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.8">13.8 stack/free</h3>
 <blockquote>
-<p>Frees a storage space on stack (in stack slots unit). This is useful for manually controlling the release of a stack storage space allocated with <i>system/stack/allocate</i>, or from outside a function.</p>
-<p><b>Syntax</b></p>
+<p>释放栈上(在栈槽单元内)的一块存储区域。它可以用来手动控制对调用<i>system/stack/allocate</i>分配的存储空间的释放，或在函数外使用。</p>
+<p><b>语法</b></p>
 <pre>system/stack/free &lt;slots&gt;
 
 &lt;slots&gt;: expression returning an integer
 </pre>
-<p></p><fieldset class="fset"><legend>Manual stack manipulations and exceptions</legend>
-<p>Current exceptions implementation (catch/throw) cannot mix with manual stack manipulations, therefore all allocated spaces on stack <b>must</b> be freed before entering a <i>catch</i> body block, or using a <i>throw</i> keyword.</p>
+<p></p><fieldset class="fset"><legend>手动操作栈和异常</legend>
+<p>当前异常的实现(catch/throw)不能与手动操作的栈结合，因此在栈上分配的空间<b>必须</b>在进入<i>catch</i>块之前释放，或者使用<i>throw</i>关键字。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.9">13.9 pc</h3>
 <blockquote>
-<p>Retrieve the CPU program counter value.</p>
-<p><b>Syntax</b></p>
+<p>获取CPU程序计数器的值。</p>
+<p><b>语法</b></p>
 <pre>system/pc
 </pre>
-<p></p><fieldset class="fset"><legend>Platform-specific results</legend>
-<p>IA-32 target returns the value of the EIP register.</p>
-<p>ARM target returns the value of the PC (r15) register.</p>
+<p></p><fieldset class="fset"><legend>特定平台的结果</legend>
+<p>IA-32架构会返回EIP寄存器的值。</p>
+<p>ARM架构会返回PC(r15)寄存器的值。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.10">13.10 cpu</h3>
 <blockquote>
-<p>Set or retrieve any of the CPU's registers value.</p>
-<p><b>Syntax</b></p>
-<p>Reading a register:</p>
+<p>设置或返回CPU中任意一个寄存器的值。</p>
+<p><b>语法</b></p>
+<p>读取寄存器的值：</p>
 <pre>system/cpu/&lt;register&gt;
 
 return: a value of type integer!.
 </pre>
-<p>Setting a register:</p>
+<p>设置寄存器的值：</p>
 <pre>system/cpu/&lt;register&gt;: &lt;value&gt;
 </pre>
-<p>where:</p>
+<p>补充：</p>
 <pre>&lt;register&gt;: valid name of a CPU register (platform-dependent)
 &lt;value&gt;   : an integer! value
 </pre>
-<p></p><fieldset class="fset"><legend>Register names</legend>
-<p>Currently supported names are:</p>
+<p></p><fieldset class="fset"><legend>寄存器名称</legend>
+<p>当前支持以下名称：</p>
 <ul>
 <li><b>IA-32</b>: eax, ecx, edx, ebx, esp, ebp, esi, edi</li>
 <li><b>ARM</b>: r0 to r15</li>
 </ul>
-<p>Support for accessing more registers (like status registers) will be added in the future.</p>
+<p>将来会添加对更多寄存器访问的支持(比如状态寄存器)。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.11">13.11 cpu/overflow?</h3>
 <blockquote>
-<p>Checks if the last integer math operation has overflown.</p>
-<p><b>Syntax</b></p>
+<p>检查最后的整数算术操作是否溢出：</p>
+<p><b>语法</b></p>
 <pre>system/cpu/overflow?
 
 return: a value of type logic!.
 </pre>
-<p>As many CPU operations can change this state, it is only reliable if used immediatly after a math operation.</p>
-<p></p><fieldset class="fset"><legend>Overflow cpu flag</legend>
-<p>This is not a direct check of the overflow flag, as some math operations on some CPUs are not setting that flag.</p>
+<p>由于很多CPU操作可以改变这个状态，所以它仅仅在算术操作之后立即使用才有效。</p>
+<p></p><fieldset class="fset"><legend>CPU溢出标志</legend>
+<p>这个命令不是直接检查溢出标志，因为有些CPU的一些算术操作不会设置溢出标志。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.12">13.12 fpu/type</h3>
 <blockquote>
-<p>Returns a unique ID for the currently used FPU.</p>
-<p><b>Syntax</b></p>
+<p>返回当前使用的FPU的唯一ID。</p>
+<p><b>语法</b></p>
 <pre>system/fpu/type
 </pre>
-<p>Possible returned values are currently:</p>
+<p>当前可能的返回值：</p>
 <ul>
 <li>FPU_TYPE_X87: for x87 FPU.</li>
 <li>FPU_TYPE_SSE: for SSE unit on Intel.</li>
@@ -2568,7 +2568,7 @@ return: true (if mode is enable) | false
 </blockquote>
 <h3 id="section-13.14">13.14 fpu/mask</h3>
 <blockquote>
-<p>Set the FPU exception masks. The following exceptions are available:</p>
+<p>设置FPU的异常掩码。以下异常有效：</p>
 <ul>
 <li>precision</li>
 <li>underflow</li>
@@ -2577,75 +2577,75 @@ return: true (if mode is enable) | false
 <li>denormal</li>
 <li>invalid-op</li>
 </ul>
-<p><b>Syntax</b></p>
-<p>Reading an exception mask state:</p>
+<p><b>语法</b></p>
+<p>读取异常掩码状态：</p>
 <pre>system/fpu/mask/&lt;exception&gt;
 
 return: true (exception is masked) | false
 </pre>
-<p>Masking or unmasking an exception:</p>
+<p>开启或关闭异常：</p>
 <pre>system/fpu/mask/&lt;exception&gt;: &lt;value&gt;
 </pre>
-<p>where:</p>
+<p>补充：</p>
 <pre>&lt;exception&gt; : is one of the above exception name
 &lt;value&gt;     : an integer! value
 </pre>
 </blockquote>
 <h3 id="section-13.15">13.15 fpu/control-word</h3>
 <blockquote>
-<p>Set or retrieve the full FPU control register.</p>
-<p><b>Syntax</b></p>
-<p>Reading the control value:</p>
+<p>设置或返回全部的FPU控制寄存器。</p>
+<p><b>语法</b></p>
+<p>读取控制值：</p>
 <pre>system/fpu/control-word
 
 return: a value of type integer!.
 </pre>
-<p>Setting a register:</p>
+<p>设置寄存器的值：</p>
 <pre>system/fpu/control-word: &lt;value&gt;
 </pre>
-<p>where:</p>
+<p>补充：</p>
 <pre>&lt;value&gt; : an integer! value
 </pre>
-<p></p><fieldset class="fset"><legend>Warning for ARM backend</legend>
-<p>Setting the control-word on ARM can have side-effects, as the same register is used for status flags.</p>
+<p></p><fieldset class="fset"><legend>ARM后端警告</legend>
+<p>在ARM上设置control-word会产生副作用，因为相同的寄存器也被用于状态标识。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.16">13.16 fpu/epsilon</h3>
 <blockquote>
-<p><i>Not implemented yet.</i></p>
+<p><i>还没有实现。</i></p>
 </blockquote>
 <h3 id="section-13.17">13.17 fpu/update</h3>
 <blockquote>
-<p>Effectively update the FPU with the last options set.</p>
-<p><b>Syntax</b></p>
+<p>使用最后设置的选项来高效的更新FPU。</p>
+<p><b>语法</b></p>
 <pre>system/fpu/update
 </pre>
-<p>All the changes to the FPU are pending until this command is sent.</p>
-<p></p><fieldset class="fset"><legend>ARM backend</legend>
-<p>On ARM backend, the changes are immediate and this command does nothing, but it is still useful for writing platform-independent code. This will be changed in the future to allow staging options and this command will be then enabled.</p>
+<p>应用到FPU的所有改变只有在这个命令被发送后才会生效。</p>
+<p></p><fieldset class="fset"><legend>ARM后端</legend>
+<p>在ARM后端上，改变会立即生效并且这个命令不做任何事，但是它对于写平台独立的代码还是很有用的。这些在将来也许会改进以便允许阶段性选项然后这个命令才会被启用。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.18">13.18 fpu/init</h3>
 <blockquote>
-<p>Initialize the FPU.</p>
-<p><b>Syntax</b></p>
+<p>初始化FPU。</p>
+<p><b>语法</b></p>
 <pre>system/fpu/init
 </pre>
-<p></p><fieldset class="fset"><legend>Intel-only</legend>
-<p>Only needed for Intel platforms, does nothing on ARM (for now).</p>
+<p></p><fieldset class="fset"><legend>仅Intel平台</legend>
+<p>只有Intel平台需要，目前在ARM上这个指令没有任何效果。</p>
 </fieldset>
 </blockquote>
 <h3 id="section-13.19">13.19 alias</h3>
 <blockquote>
-<p>Get the ID value of an alias. This is required in typed functions in order to distinguish different struct! values.</p>
-<p><b>Syntax</b></p>
+<p>获取一个别名的ID值。它在类型化函数(typed function)被用来区分不同的struct!值。</p>
+<p><b>语法</b></p>
 <pre>system/alias/&lt;name&gt;
 
 where
    &lt;name&gt; : existing alias name
 </pre>
-<p>This expression returns an <b>integer!</b> value that can be used to test at runtime, the type of an argument in a typed function.</p>
-<p>Example:</p>
+<p>这个表达式返回一个<b>integer!</b>值，可以在运行时用于测试类型化函数(typed function)的参数类型。</p>
+<p>例子：</p>
 <pre>foo!: alias struct! [a [byte!]]
 s: declare foo!
 
@@ -2664,21 +2664,21 @@ probe: func [
 
 probe [1 "r" s 123]
 </pre>
-<p>will output:</p>
+<p>将会输出：</p>
 <pre>foo! alias detected
 </pre>
 </blockquote>
-<h2 id="section-14">14. Compiler directives</h2>
+<h2 id="section-14">14. 编译器指令</h2>
 <blockquote>
-<p>Some features of Red/System need to be processed at compile-time rather than at run-time. This is especially true for features related to the linking phase that builds the executable file. In order to distinguish such compile-time commands or options, compiler directive are introduced. Their syntax is:</p>
+<p>Red/System的有些特性需要在编译时被处理而不是在运行时。这是一个把链接阶段和生成可执行文件关联起来的非常有用的一个特性。为了区别这些编译时命令或选项，这里对编译器指令作下介绍。它们的语法如下：</p>
 <pre>#&lt;directive&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...
 
 &lt;directive&gt;  : a valid identifier
 &lt;argument-*&gt; : argument can be any Red valid datatype
 </pre>
-<p>The number of arguments is specific to each compiler directive.</p>
-<p>As compiler directives apply globally to programs, they are not allowed inside code blocks (this restriction might be removed if local directives are introduced in the future).</p>
-<p><u>Implementation note</u>: The directive arguments datatype set, is the one provided by REBOL during the bootstrapping phase only. Once the Red layer has been implemented, the allowed datatypes will be Red ones.</p>
+<p>每个编译器指令后面，可以指定多个参数。</p>
+<p>目前编译器指令只能作用在程序的全局部分，它们不能出现代码块的内部(如果将来增加了局部编译器指令，这个限制可能会被移除)。</p>
+<p><u>注意</u>：这些指令可接受的参数的数据类型，是REBOL在启动阶段提供的类型之一。一旦Red层面完全实现，被允许的数据类型只能是Red中的数据类型。</p>
 </blockquote>
 <h2 id="section-15">15. Importing External Libraries</h2>
 <blockquote>
