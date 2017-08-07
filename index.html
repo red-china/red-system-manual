@@ -1508,14 +1508,14 @@ probe s/inc 3                          ;-- will output 4
 ]
 </pre>
 </blockquote>
-<h2 id="section-7">7. Scoping</h2>
+<h2 id="section-7">7. 作用域</h2>
 <blockquote>
-<p>In Red/System, variables are statically scoped. The place in source code where a variable is declared determines its scope.</p>
+<p>在Red/System中，变量属于静态作用域。 源代码中声明变量的位置决定了它的作用域。</p>
 </blockquote>
-<h3 id="section-7.1">7.1 Global Context</h3>
+<h3 id="section-7.1">7.1 全局上下文</h3>
 <blockquote>
-<p>Global context is defined as the global namespace where all global variables and functions are defined. This context is unique. As a simple rule, every variable not declared in a function is a global variable bound to global context.</p>
-<p>Example:</p>
+<p>全局上下文定义为定义所有全局变量和函数的全局命名空间。 这个上下文是唯一的。 作为一个简单的规则，在函数中未声明的每个变量都是绑定到全局上下文的全局变量。</p>
+<p>例子：</p>
 <pre>foo: 123                               ;-- global variable
 
 f: func [/local bar [integer!]][
@@ -1523,10 +1523,10 @@ f: func [/local bar [integer!]][
 ]
 </pre>
 </blockquote>
-<h3 id="section-7.2">7.2 Functions Contexts</h3>
+<h3 id="section-7.2">7.2 函数上下文</h3>
 <blockquote>
-<p>Each defined function has its own local context. Variables declared in a function's definition block are locally scoped and can't be accessed outside of the function's body. On the other hand, global variable can be referenced and modified from functions. If a local variable has the same name as a global one, the local one will take precedence in function's body. The value of the homonym global variable won't be affected by local redefinitions in functions contexts.</p>
-<p>Example:</p>
+<p>每个定义的函数都有自己的局部上下文。 在函数的定义块中声明的变量是局部作用域的，不能在函数体内访问。 另一方面，全局变量可以被函数引用和修改。如果局部变量与全局变量具有相同的名称，则本地变量将在函数体中优先。 同义词全局变量的值不会受函数上下文中的局部重定义的影响。</p>
+<p>例子：</p>
 <pre>foo: 1                                 ;-- global variable
 var: 2
 
@@ -1550,17 +1550,17 @@ f: func [
    foo + var + bar                     ;-- will return 14
 ]
 </pre>
-<h4 id="section-7.2.1">7.2.1 USE keyword</h4>
-<p>Inside a function body, it is possible to create arbitrary local contexts, with additional local variables thanks to the USE keyword:</p>
-<p><b>Syntax</b></p>
+<h4 id="section-7.2.1">7.2.1 USE关键字</h4>
+<p>在函数体内部，使用USE关键字，可以创建任意的本地上下文，还有额外的局部变量：</p>
+<p><b>语法</b></p>
 <pre>use [&lt;spec&gt;][&lt;code&gt;]
 
 &lt;spec&gt; : list of local variables followed by optional type specification
 &lt;code&gt; : body block of code
 </pre>
-<p>This creates a local context where new variables are available in the body block. Those variables are freed on exiting the body block. Using a variable name already existing in the function specification will result in a compilation error.</p>
-<p>Local variables listed in spec block follow the same syntax as local variables in function spec block. Variable names can be followed by a type specification, or let the compiler infer the type (except for structs by value, which must have a declared type). Local contexts created by USE can also be freely nested (as long as no variable names from outer local contexts are re-used).</p>
-<p>Examples:</p>
+<p>这创建了一个局部上下文，其中新变量在body块中可用。 这些变量在离开body块时被释放。 使用函数规范中已经存在的变量名将导致编译错误。</p>
+<p>规范块中列出的局部变量遵循与功能规范块中局部变量相同的语法。 变量名后跟一个类型说明，或让编译器推断类型（除了结构体的值，必须具有声明类型）。 USE创建的本地上下文也可以自由嵌套（只要不再使用外部本地上下文的变量名称）。</p>
+<p>例子：</p>
 <pre>f: func [
    /local 
        foo [integer!]
@@ -1592,21 +1592,21 @@ f: func [
 ]
 </pre>
 </blockquote>
-<h3 id="section-7.3">7.3 Namespaces</h3>
+<h3 id="section-7.3">7.3 命名空间</h3>
 <blockquote>
-<p>It is possible to define local namespaces to provide local contexts able to encapsulate source code.</p>
-<p><b>Syntax</b></p>
+<p>可以定义局部命名空间来提供能够封装源代码的局部上下文。</p>
+<p><b>语法</b></p>
 <pre>&lt;name&gt;: context [&lt;code&gt;]
 
 &lt;name&gt; : namespace identifier
 &lt;code&gt; : body block of code
 </pre>
-<p>Any code is allowed in the body block including function definitions. All variables and functions created will have a local name that can be accessed locally or from outside using context name prefix in a path notation:</p>
+<p>包括功能定义在内的主体块中允许任何代码。 创建的所有变量和函数都将具有可以使用路径符号中的上下文名称前缀在本地或外部访问的本地名称：</p>
 <pre>&lt;name&gt;/&lt;variable&gt;                       ;-- reading a variable from outside
 &lt;name&gt;/&lt;variable&gt;:                      ;-- setting a variable from outside
 &lt;name&gt;/&lt;func-name&gt;                      ;-- invoking a function from outside
 </pre>
-<p>The following elements are affected by namespace and become locally defined when declared in a context body block:</p>
+<p>以下元素受命名空间的影响，并在上下文正文块中声明时变为局部定义：</p>
 <ul>
 <li>variables</li>
 <li>functions</li>
@@ -1614,7 +1614,7 @@ f: func [
 <li>enumerations</li>
 <li>aliases</li>
 </ul>
-<p>Example:</p>
+<p>例子：</p>
 <pre>b: 0
 a: context [
    b: 123
@@ -1634,12 +1634,12 @@ a/foo                                  ;-- will output 1
 a/b: a/b + 1
 print-line a/b                         ;-- will output 124
 </pre>
-<p></p><fieldset class="fset"><legend>Namespaces are not objects!</legend>
-<p>Even if they look like objects, namespaces only exist at compilation time, so they cannot be manipulated at run-time.</p>
+<p></p><fieldset class="fset"><legend>命名空间不是一个对象！</legend>
+<p>即使它们看起来像对象，命名空间只在编译时存在，所以在运行时不能被操纵。</p>
 </fieldset>
-<h4 id="section-7.3.1">7.3.1 Nested namespaces</h4>
-<p>Nesting namespaces is allowed. When conflicting names are used for variables or functions, the nearest definition is used.</p>
-<p>Example:</p>
+<h4 id="section-7.3.1">7.3.1 嵌套命名空间</h4>
+<p>允许嵌套命名空间。 当冲突的名称用于变量或函数时，使用最近的定义。</p>
+<p>例子：</p>
 <pre>a: context [
    b: 123
 
@@ -1658,25 +1658,25 @@ a/c/foo                                ;-- will output hello
 print-line a/c/b/2                     ;-- will output e
 print-line a/c/blue                    ;-- will output 2
 </pre>
-<h4 id="section-7.3.2">7.3.2 Global context access</h4>
-<p>From nested namespaces, in order to access an indentifier from global context when it is also defined locally, a special virtual path is provided to solve such cases:</p>
-<p><b>Syntax</b></p>
+<h4 id="section-7.3.2">7.3.2 全局上下文访问</h4>
+<p>在嵌套命名空间内，为了在局部定义时从全局上下文中访问标识符，提供了一个特殊的虚拟路径来解决这种情况：</p>
+<p><b>语法</b></p>
 <pre>system/words/&lt;name&gt;                    ;-- calling a function, reading a variable
 system/words/&lt;name&gt;:                   ;-- setting a variable
 
 &lt;name&gt; : identifer or access path
 </pre>
-<p>Example:</p>
+<p>例子：</p>
 <pre>b: 123
 a: context [
    b: 0
    print-line system/words/b           ;-- will output 123
 ]
 </pre>
-<p>Any global context identifier can be retrieved this way.</p>
-<h4 id="section-7.3.3">7.3.3 WITH keyword</h4>
-<p>In order to limit source code verbosity, the namespace prefix can be omitted if the source code is enclosed in a <b>with</b> body block.</p>
-<p><b>Syntax</b></p>
+<p>任何全局上下文标识符都可以这样检索。</p>
+<h4 id="section-7.3.3">7.3.3 WITH关键字</h4>
+<p>为了限制源代码冗长度，如果源代码包含在具有</b>with<b>的块中，则可以省略命名空间前缀。</p>
+<p><b>语法</b></p>
 <pre>with &lt;name&gt;    [&lt;code&gt;]
 with [&lt;names&gt;] [&lt;code&gt;]                ;-- alternative syntax for multiple names
 
@@ -1684,8 +1684,8 @@ with [&lt;names&gt;] [&lt;code&gt;]                ;-- alternative syntax for mu
 &lt;names&gt; : list of namespace identifiers
 &lt;code&gt;  : body block of code
 </pre>
-<p><u>Note</u>: If multiple namespaces are specified and if they share same identifier(s), the last defined namespace (from the compiler point of view) takes precedence.</p>
-<p>Example:</p>
+<p><u>注意</u>：如果指定了多个命名空间，并且如果它们共享相同的标识符，则最后定义的命名空间（从编译器的角度来看）优先。</p>
+<p>例子：</p>
 <pre>a: context [b: 0]
 c: context [b: 1 d: 123]
 
@@ -1700,108 +1700,108 @@ with [a c][
 ]
 </pre>
 </blockquote>
-<h2 id="section-8">8. Infix operators</h2>
+<h2 id="section-8">8. 中缀操作符</h2>
 <blockquote>
-<p>Infix operators take two arguments and are positioned between them.</p>
+<p>中缀操作符带有两个参数，且位于它们之间。</p>
 </blockquote>
-<h3 id="section-8.1">8.1 Math operators</h3>
+<h3 id="section-8.1">8.1 数学操作符</h3>
 <blockquote>
-<p>The following math operations apply on integer or float values. When the operation results in an exceeded memory storage limit, <i>behaviour to be defined</i>.</p>
-<p><b>Addition</b>: +</p>
+<p>以下数学运算适用于整数或浮点值。 当操作导致超出内存存储限制时，<i>行为待定义</i>。</p>
+<p><b>加法</b>：+</p>
 <pre>value1 + value2
 </pre>
-<p><b>Subtraction</b>: -</p>
+<p><b>减法</b>：-</p>
 <pre>value1 - value2
 </pre>
-<p><b>Multiplication</b>: *</p>
+<p><b>乘法</b>：*</p>
 <pre>value1 * value2
 </pre>
-<p><b>Division</b>: /</p>
+<p><b>除法</b>：/</p>
 <pre>value1 / value2
 </pre>
-<p><b>Remainder</b>: %</p>
+<p><b>求余</b>：%</p>
 <pre>value1 % value2
 </pre>
-<p>Note: a remainder will be negative if the divisor is negative. Same as in C or // operator in REBOL. See float types section for specific behaviour of this operator on float values.</p>
-<p><b>Modulo</b>: //</p>
+<p>注意：如果除数为负，余数将为负数。 与REBOL中的C或//操作符相同。 有关float运算符的特定行为，请参见float类型部分。</p>
+<p><b>求模</b>：//</p>
 <pre>value1 // value2
 </pre>
-<p>Note: a positive result is always returned. Same as 'modulo function in REBOL. See float types section for specific behaviour of this operator on float values.</p>
-<p>where</p>
+<p>注意：总是返回一个正数结果。 与REBOL中的模数函数相同。 有关float运算符的特定行为，请参见float类型部分。</p>
+<p>此处</p>
 <pre>value1 : an expression returning an integer!
 value2 : expression of same (or compatible) datatype as &lt;value1&gt;
 </pre>
-<p>The resulting value type for math operators is the type of the left argument (an implicit type casting is operated when required).</p>
-<p><u>Note:</u> for + and - operators, a pointer!, struct! or c-string! value can be used for both arguments or as first argument with an integer expression as second argument (see "Pointer arithmetic").</p>
+<p>数学运算符的结果值类型是左参数的类型（隐式类型转换在需要时运行）。</p>
+<p><u>注意：</u> 对于+和 - 运算符，一个pointer!，struct!或c-string!值可以用于两个参数，也可以作为第一个参数使用整数表达式作为第二个参数（参见“指针算术”）。</p>
 </blockquote>
-<h3 id="section-8.2">8.2 Bitshift operators</h3>
+<h3 id="section-8.2">8.2 移位操作符</h3>
 <blockquote>
-<p><b>Signed left shift</b>: &lt;&lt;</p>
+<p><b>有符号左移</b>：&lt;&lt;</p>
 <pre>value1 &lt;&lt; value2
 </pre>
-<p><b>Signed right shift</b>: &gt;&gt;</p>
+<p><b>有符号右移</b>：&gt;&gt;</p>
 <pre>value1 &gt;&gt; value2
 </pre>
-<p><b>Unsigned right shift</b>: &gt;&gt;&gt;</p>
+<p><b>无符号右移</b>：&gt;&gt;&gt;</p>
 <pre>value1 &gt;&gt;&gt; value2
 </pre>
-<p>where</p>
+<p>此处</p>
 <pre>value1 : an expression returning an integer! or byte!
 value2 : integer! expression restricted to 0-31 range only.
 </pre>
-<p><u>Note</u>: There is no unsigned left shift operator as it is the same as the signed left shift one.</p>
+<p><u>注意</u>：没有无符号左移运算符，因为它与有符号左移运算符相同。</p>
 </blockquote>
-<h3 id="section-8.3">8.3 Bitwise operators</h3>
+<h3 id="section-8.3">8.3 按位操作符</h3>
 <blockquote>
-<p><b>Bitwise OR</b>: or</p>
+<p><b>按位OR</b>: or</p>
 <pre>value1 or value2
 </pre>
-<p><b>Bitwise XOR</b>: xor</p>
+<p><b>按位XOR</b>: xor</p>
 <pre>value1 xor value2
 </pre>
-<p><b>Bitwise AND</b>: and</p>
+<p><b>按位AND</b>: and</p>
 <pre>value1 and value2
 </pre>
-<p><b>Bitwise / Logical NOT</b>: not</p>
+<p><b>按位/逻辑NOT</b>: not</p>
 <pre>not value1
 </pre>
-<p>where</p>
+<p>此处</p>
 <pre>value1 : an expression returning an integer!, byte! or logic!
 value2 : expression of same datatype as &lt;value1&gt;
 </pre>
-<p><u>Note</u>: Logical NOT will return the opposite of the logic argument (TRUE&lt;=&gt;FALSE), while bitwise NOT will apply one's complement on the integer argument.</p>
+<p><u>注意</u>：逻辑NOT将返回与逻辑参数（TRUE&lt;=&gt;FALSE）的相反，而按位NOT将对整数参数应用补码。</p>
 </blockquote>
-<h3 id="section-8.4">8.4 Comparison operators</h3>
+<h3 id="section-8.4">8.4 比较操作符</h3>
 <blockquote>
-<p>These operators can be used only where a condition is allowed. See "Control flow functions" section for a list of functions using conditions.</p>
-<p><b>Equal</b>: =</p>
+<p>只有在允许条件的情况下才能使用这些操作符。 有关使用条件的功能列表，请参阅“控制流程功能”一节。</p>
+<p><b>相等</b>: =</p>
 <pre>value1 = value2
 </pre>
-<p><b>Not equal</b>: &lt;&gt;</p>
+<p><b>不等于</b>: &lt;&gt;</p>
 <pre>value1 &lt;&gt; value2
 </pre>
-<p><b>Greater than</b>: &gt;</p>
+<p><b>大于</b>: &gt;</p>
 <pre>value1 &gt; value2
 </pre>
-<p><b>Less than</b>: &lt;</p>
+<p><b>小于</b>: &lt;</p>
 <pre>value1 &lt; value2
 </pre>
-<p><b>Greater than or equal</b>: &gt;=</p>
+<p><b>大于等于</b>: &gt;=</p>
 <pre>value1 &gt;= value2
 </pre>
-<p><b>Less than or equal</b>: &lt;=</p>
+<p><b>小于等于</b>: &lt;=</p>
 <pre>value1 &lt;= value2
 </pre>
-<p>where</p>
+<p>此处</p>
 <pre>value1 : an expression returning a integer!, byte!, float!, float32!, 
          c-string!, pointer! or struct!
 
 value2 : expression of same datatype as &lt;value1&gt;
 </pre>
-<p><u>Note</u>:</p>
+<p><u>注意</u>：</p>
 <ul>
-<li>= and &lt;&gt; can also be used to compare logic! values.</li>
-<li>For c-string!, pointer! and struct!, comparisons are done on references, not on the value pointed at.</li>
+<li>=和&lt;&gt;也可以用于比较logic!值。</li>
+<li>对于c-string!, pointer!和struct!, 仅仅比较引用，而不是比较指向的值。</li>
 </ul>
 </blockquote>
 <h2 id="section-9">9. Control flow functions</h2>
